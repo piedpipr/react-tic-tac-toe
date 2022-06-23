@@ -33,6 +33,7 @@ class Board extends React.Component<BoardProps, BoardStetes> {
   }
   handleClick(i:any){
     const squares = this.state.squares.slice();
+    if(calculateWinner(squares) || squares[i]) return; // if winner or already clicked retun event/make button unclickable
     squares[i] = this.state.xIsNext ? 'X': 'O';
     this.setState({
       squares: squares,
@@ -49,7 +50,7 @@ class Board extends React.Component<BoardProps, BoardStetes> {
     const winner = calculateWinner(this.state.squares);
     let status;    
     if (winner) {      
-      status = 'Winner: ' + winner;    
+      status = 'Winner: ' + winner;    //if winner return status as winner X or O
     } 
     else {
             status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
